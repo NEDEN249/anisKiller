@@ -209,7 +209,8 @@ function goFight(){
   monsterStats.style.display = "block";
   monsterNameText.innerText = monsterName;
   monsterHealthText.innerText = monsterHealth;
-  
+  text.innerHTML += `<div class="location-image"><img src="./assets/img/anis icon.png" alt="Anis Icon"></div>`;
+  text.innerHTML += `<div class="location-text">You are facing the mighty Angry Anis. Prepare for battle!</div>`;
 }
 
 function attack(){
@@ -240,6 +241,7 @@ function attack(){
 
 function dodge(){
   text.innerText += "\n" + "You predicted the wild " + monsters[fighting].name + " attack and dodged accordingly";
+  text.innerHTML += `<div class="location-image"><img src="./assets/img/anis icon.png" alt="Anis Icon"></div>`;
 } 
 
 function lose(){
