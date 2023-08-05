@@ -153,3 +153,21 @@ body {
   border-style: solid;
 }
 
+/* ------------------------------------------------anis icon when fighting her-------------------------------------------------- */
+
+.location-image {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.location-image img {
+  width: 100px;
+  height: 100px;
+}
+
+.location-text {
+  text-align: center;
+  margin-top: 10px;
+  color: white;
+}
