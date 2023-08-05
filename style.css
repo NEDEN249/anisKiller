@@ -79,6 +79,13 @@ body {
   color: white;
 }
 
+#stats .stat {
+  font-size: 18px;
+  font-weight: 500;
+  padding: 3px 10px;
+  margin-right: 0px;
+}
+
 /* ------------------------------------------------monster stats-------------------------------------------------- */
 
 #monsterStats{
