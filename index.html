@@ -1,31 +1,43 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>RPG - anisKiller </title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG - anisKiller</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
-<div id="game">
-  <div id="stats">
-    <span class="stat">XP: <strong><span id="xpText">0</span></strong></span>
-    <span class="stat">Health: <strong><span id="healthText">100</span></strong></span>
-    <span class="stat">Gold: <strong><span id="goldText">50</span></strong></span>
-  </div>
-  <div id="controls">
-    <button id="button1">Go to STORE</button>
-    <button id="button2">Go to CAVE</button>
-    <button id="button3">Fight ANGRYANIS</button>
-  </div>
-  <div id="monsterStats">
-    <span class="stat">Monster Name: <strong><span id="monsterName"></span></strong></span>
-    <span class="stat">Health: <strong><span id="monsterHealth"></span></strong></span>
-  </div>
-  <div id="text">Welcome to anisKiller. Your goal is to kill the Angry Anis who is threatening the town. You are in the town square. How will you proceed? Use the buttons above.</div>
+<div id="header" class="header-container">
+  <img src="./assets/img/anis icon.png" alt="Anis Icon" class="header-icon">
+  <h1 class="header-title">anisKiller RPG</h1>
 </div>
-<script  src="script.js"></script>
+<body>
+
+
+  <div id="game">
+      <div id="stats" class="info-container">
+          <span class="stat">XP: <strong><span id="xpText">0</span></strong></span>
+          <span class="stat">Health: <strong><span id="healthText">100</span></strong></span>
+          <span class="stat">Gold: <strong><span id="goldText">50</span></strong></span>
+      </div>
+      
+      <div id="monsterStats" class="info-container no-border">
+          <span class="stat">Monster Name: <strong><span id="monsterName"></span></strong></span>
+          <span class="stat">Health: <strong><span id="monsterHealth"></span></strong></span>
+      </div>
+      <div id="text" class="game-text">Welcome to anisKiller. Your goal is to kill the Angry Anis who is
+          threatening the town.
+          <br><br>
+          You are in the town square. How will you proceed...
+      </div>
+      <div id="controls" class="button-container">
+        <button id="button1" class="action-button btn">Go to STORE</button>
+        <button id="button2" class="action-button btn">Go to CAVE</button>
+        <button id="button3" class="action-button btn">Fight ANGRYANIS</button>
+      </div>
+  </div>
+    <script src="script.js"></script>
 </body>
 
 </html>
