@@ -148,7 +148,8 @@ function buyWeapon() {
       let newWeapon = weapons[currentWeapon].name;
       text.innerText = "Here is your '" + newWeapon + "'\n" + " Thank you for your business.";
       inventory.push(newWeapon)
-      text.innerText += "\n" + " Your inventory now contains: " + inventory;
+      updateInventoryList();
+      text.innerText += "\n" + " Your inventory now contains: " + "\n" + "\n" + inventory;
     }
     else {
       text.innerText = "\n" + "your schmeckles are insufficient"
@@ -158,6 +159,16 @@ function buyWeapon() {
     text.innerText = "\n" + "It appears you already behold my finest weaponary!"
     button2.innerText = "Would you like to sell a weapon back to me? [15 GOLD]"
     button2.onclick = sellWeapon;
+  }
+}
+
+function updateInventoryList() {
+  const inventoryList = document.querySelector("#inventoryList");
+  inventoryList.innerHTML = "";
+  for (const item of inventory) {
+      const li = document.createElement("li");
+      li.innerText = item;
+      inventoryList.appendChild(li);
   }
 }
 
@@ -209,7 +220,8 @@ function goFight(){
   monsterStats.style.display = "block";
   monsterNameText.innerText = monsterName;
   monsterHealthText.innerText = monsterHealth;
-  
+  text.innerHTML += `<div class="location-image"><img src="./assets/img/anis icon.png" alt="Anis Icon"></div>`;
+  text.innerHTML += `<div class="location-text">You are facing the mighty Angry Anis. Prepare for battle!</div>`;
 }
 
 function attack(){
@@ -240,6 +252,7 @@ function attack(){
 
 function dodge(){
   text.innerText += "\n" + "You predicted the wild " + monsters[fighting].name + " attack and dodged accordingly";
+  text.innerHTML += `<div class="location-image"><img src="./assets/img/anis icon.png" alt="Anis Icon"></div>`;
 } 
 
 function lose(){
@@ -319,4 +332,22 @@ function pick(number){
     }
   }
   
+}
+
+const inventoryButton = document.querySelector("#inventoryButton");
+const hideInventoryButton = document.querySelector("#hideInventoryButton");
+const inventoryContent = document.querySelector("#inventoryContent");
+
+let isInventoryVisible = false;
+
+inventoryButton.addEventListener("click", toggleInventory);
+hideInventoryButton.addEventListener("click", toggleInventory);
+
+function toggleInventory() {
+    if (isInventoryVisible) {
+        inventoryContent.style.height = "0";
+    } else {
+        inventoryContent.style.height = "auto";
+    }
+    isInventoryVisible = !isInventoryVisible;
 }
