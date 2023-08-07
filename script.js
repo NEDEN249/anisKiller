@@ -11,6 +11,14 @@ let currentWeapon = 0;
 let fighting;
 let monsterHealth;
 let inventory = ["butterKnife"];
+let attackSound = new Audio('audio/attack.mp3');
+let dodgeSound = new Audio('audio/dodge.mp3');
+let brokenSound = new Audio('audio/broken.mp3');
+let coinSound = new Audio('audio/coin.mp3');
+let correctChoice = new Audio('audio/correctChoice.mp3');
+let incorrectChoice = new Audio('audio/incorrectChoice.mp3');
+let successSound = new Audio('audio/success.mp3');
+let victorySound = new Audio('audio/victory.mp3');
 
 const button1 = document.querySelector("#button1");
 const button2 = document.querySelector("#button2");
@@ -147,11 +155,14 @@ function buyWeapon() {
       goldText.innerText = gold;
       let newWeapon = weapons[currentWeapon].name;
       text.innerText = "Here is your '" + newWeapon + "'\n" + " Thank you for your business.";
+      coinSound.play();
       inventory.push(newWeapon)
-      text.innerText += "\n" + " Your inventory now contains: " + inventory;
+      updateInventoryList();
+      text.innerText += "\n" + " Your inventory now contains: " + "\n" + "\n" + inventory;
     }
     else {
       text.innerText = "\n" + "your schmeckles are insufficient"
+      incorrectChoice.play();
     }
   }
   else{
@@ -161,15 +172,27 @@ function buyWeapon() {
   }
 }
 
+function updateInventoryList() {
+  const inventoryList = document.querySelector("#inventoryList");
+  inventoryList.innerHTML = "";
+  for (const item of inventory) {
+      const li = document.createElement("li");
+      li.innerText = item;
+      inventoryList.appendChild(li);
+  }
+}
+
 function buyHealth() {
   if (gold >= 10){
     gold -= 10;
     health += 10;
     goldText.innerText = gold;
     healthText.innerText = health;
+    coinSound.play();
   }
   else {
     text.innerText = "your schmeckles are insufficient";
+    incorrectChoice.play();
   }
   
 }
@@ -180,10 +203,12 @@ function sellWeapon(){
     goldText.innerText = gold;
     let currentWeapon = inventory.shift();
     text.innerText = "Say goodbye to " + currentWeapon + " . Here is your Gold.";
+    coinSound.play();
     text.innerText += " Your inventory now contains: " + inventory;
   }
   else{
     text.innerText = " I can't buy this. How will you fend for yourself if you sell your only weapon!"
+    incorrectChoice.play();
   }
 }
 
@@ -218,9 +243,11 @@ function attack(){
   text.innerText += "\n" + "The wild " + monsterName + " attacked you!";
   text.innerText += "\n" + "You striked the wild " + monsterName + " with your " + weapons[currentWeapon].name + "!";
   if (attackSuccessful()){
+    attackSound.play()
     health -= getMonsterAttackValue(monsters[fighting].level);
   }
   else {
+    dodgeSound.play();
     text.innerText += " The monster read your move and dodged...";
   }
   monsterHealth -= weapons[currentWeapon].power + Math.floor(Math.random() * xp) + 1;
@@ -235,12 +262,14 @@ function attack(){
 
   if (Math.random() <= .1 && inventory.length != 1){
     text.innerText += "\n" + "Your " + inventory.pop() + " shattered rendering it useless. You discard the weapon";
+    brokenSound.play();
     currentWeapon--;
   }
 }
 
 function dodge(){
   text.innerText += "\n" + "You predicted the wild " + monsters[fighting].name + " attack and dodged accordingly";
+  dodgeSound.play();
   text.innerHTML += `<div class="location-image"><img src="./assets/img/anis icon.png" alt="Anis Icon"></div>`;
 } 
 
@@ -253,11 +282,13 @@ function win(){
   xp += monsters[fighting].level;
   goldText.innerText = gold;
   xpText.innerText = xp;
+  successSound.play();
   update(locations[4]);
 }
 
 function winGame(){
   update(locations[6]);
+  victorySound.play();
 }
 
 function restart(){
@@ -269,6 +300,7 @@ function restart(){
   goldText.innerText = gold;
   healthText.innerText = health;
   xpText.innerText = xp;
+  inventoryList.innerHTML = "butterKnife";
   returnToTownSquare();
 }
 
@@ -305,11 +337,13 @@ function pick(number){
   }
   if (numbers.indexOf(number) !== -1){
     text.innerText += "YOU ARE RIGHT! [GAIN 30 GOLD]";
+    correctChoice.play();
     gold+=30;
     goldText.innerText = gold;
   }
   else {
     text.innerText += "Incorrect";
+    incorrectChoice.play();
     health -= 10;
     healthText.innerText = health;
     if (health <= 0){
@@ -321,4 +355,22 @@ function pick(number){
     }
   }
   
+}
+
+const inventoryButton = document.querySelector("#inventoryButton");
+const hideInventoryButton = document.querySelector("#hideInventoryButton");
+const inventoryContent = document.querySelector("#inventoryContent");
+
+let isInventoryVisible = false;
+
+inventoryButton.addEventListener("click", toggleInventory);
+hideInventoryButton.addEventListener("click", toggleInventory);
+
+function toggleInventory() {
+    if (isInventoryVisible) {
+        inventoryContent.style.height = "0";
+    } else {
+        inventoryContent.style.height = "auto";
+    }
+    isInventoryVisible = !isInventoryVisible;
 }
