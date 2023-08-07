@@ -374,3 +374,4 @@ function toggleInventory() {
     }
     isInventoryVisible = !isInventoryVisible;
 }
+
