@@ -7,4 +7,6 @@ Just a little RPG game where you goal is to kill the Angry Anis who is threateni
 git clone https://github.com/NEDEN249/anisKiller.git
 ```
 
-2. Open the index.html file by double-clicking
+2. Open the index.html file by double-clicking the file
+
+3. Try your best to defeat Angry Anis!!
